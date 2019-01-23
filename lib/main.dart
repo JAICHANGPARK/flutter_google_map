@@ -60,7 +60,7 @@ class _HomePageState extends State<HomePage> {
                     iconSize: 30.0,
                   ),
                 ),
-                onChanged: (val){
+                onChanged: (val) {
                   setState(() {
                     searchAddr = val;
                   });
@@ -71,6 +71,14 @@ class _HomePageState extends State<HomePage> {
         ],
       ),
     );
+  }
+
+  searchAndNavigate() {
+    Geolocator().placemarkFromAddress(searchAddr).then((result) {
+      mapController.animateCamera(CameraUpdate.newCameraPosition(CameraPosition(
+          target: LatLng(
+              result[0].position.latitude, result[0].position.longitude))));
+    });
   }
 
   void onMapCreated(controller) {
