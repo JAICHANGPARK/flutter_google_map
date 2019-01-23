@@ -11,7 +11,6 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-
         primarySwatch: Colors.blue,
       ),
       home: HomePage(),
@@ -35,23 +34,36 @@ class _HomePageState extends State<HomePage> {
         children: <Widget>[
           GoogleMap(
             onMapCreated: onMapCreated,
-            options: GoogleMapOptions(),
+            options: GoogleMapOptions(
+              cameraPosition:
+                  CameraPosition(target: LatLng(40.7128, -74.0060), zoom: 10.0),
+            ),
+          ),
+          Positioned(
+            top: 30.0,
+            right: 15.0,
+            left: 15.0,
+            child: Container(
+              height: 50.0,
+              width: double.infinity,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10.0),
+                color: Colors.white
+              ),
+              child:,
+            ),
           )
         ],
       ),
-
-
     );
   }
 
-  void onMapCreated (controller){
+  void onMapCreated(controller) {
     setState(() {
       mapController = controller;
     });
   }
-
 }
-
 
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
